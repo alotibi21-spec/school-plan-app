@@ -1,4 +1,4 @@
-const C='sip-smp-1792100000',F=['./','index.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png'];
+const C='sip-smp-1792200000',F=['./','index.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>Promise.all(F.map(u=>fetch(u,{cache:'no-store'}).then(r=>c.put(u,r))))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;const nav=q.mode==='navigate'||(q.headers.get('accept')||'').includes('text/html');e.respondWith((nav?fetch(q,{cache:'no-store'}):fetch(q)).then(r=>{if(r&&r.ok){const cp=r.clone();caches.open(C).then(c=>c.put(q,cp))}return r}).catch(()=>caches.match(q).then(r=>r||caches.match('index.html'))))});

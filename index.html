@@ -300,6 +300,7 @@ footer.foot{background:var(--card);color:var(--mute);border-top:1px solid var(--
 .repwarn{color:#C62828;font-weight:800;background:#fdecea;border:1px solid #f5b5b0;border-radius:10px;padding:8px 12px;margin:-6px 0 14px;font-size:15px}[data-theme=dark] .repwarn{color:#ff8a80;background:#3a1716;border-color:#7a2a26}@media print{.repwarn{display:none}}
 html body{background-color:#f3faf7;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2756%27%20height%3D%2756%27%20viewBox%3D%270%200%2056%2056%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%2300A890%27%20stroke-opacity%3D%27.10%27%20stroke-width%3D%271%27%3E%3Cpath%20d%3D%27M28%208l6%2014%2014%206-14%206-6%2014-6-14-14-6%2014-6z%27%2F%3E%3Cpath%20d%3D%27M14%2014h28v28H14z%27%20transform%3D%27rotate%2845%2028%2028%29%27%2F%3E%3Ccircle%20cx%3D%2728%27%20cy%3D%2728%27%20r%3D%275%27%2F%3E%3Cpath%20d%3D%27M0%200l8%208M56%200l-8%208M0%2056l8-8M56%2056l-8-8%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),radial-gradient(1200px 600px at 100% 0%,rgba(0,168,144,.13),transparent 60%),radial-gradient(900px 500px at 0% 100%,rgba(231,249,233,.95),transparent 65%),linear-gradient(180deg,#eef9f5 0%,#f6fbf9 45%,#e9f6f0 100%);background-repeat:repeat,no-repeat,no-repeat,no-repeat;background-attachment:scroll,fixed,fixed,fixed;min-height:100vh}html[data-theme=dark] body{background-color:#0f1513;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2756%27%20height%3D%2756%27%20viewBox%3D%270%200%2056%2056%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%235cc9b0%27%20stroke-opacity%3D%27.07%27%20stroke-width%3D%271%27%3E%3Cpath%20d%3D%27M28%208l6%2014%2014%206-14%206-6%2014-6-14-14-6%2014-6z%27%2F%3E%3Cpath%20d%3D%27M14%2014h28v28H14z%27%20transform%3D%27rotate%2845%2028%2028%29%27%2F%3E%3Ccircle%20cx%3D%2728%27%20cy%3D%2728%27%20r%3D%275%27%2F%3E%3Cpath%20d%3D%27M0%200l8%208M56%200l-8%208M0%2056l8-8M56%2056l-8-8%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),radial-gradient(1200px 600px at 100% 0%,rgba(0,168,144,.16),transparent 60%),linear-gradient(180deg,#101917 0%,#0f1513 60%,#0c1311 100%)}@media (max-width:640px){html body{background-attachment:scroll}}@media print{html body,html[data-theme=dark] body{background:#fff!important}}
 .seal{width:110px;height:110px;flex:0 0 auto;transform:rotate(-3deg);margin-inline-start:4px}.seal svg{width:100%;height:100%;display:block}[data-theme=dark] .seal{filter:brightness(2.6) saturate(.9)}@media(max-width:640px){.seal{width:84px;height:84px}.top-in{flex-wrap:nowrap}.top-in .brand{min-width:0;flex:1 1 auto}}@media(max-width:380px){.seal{width:72px;height:72px}}@media print{.seal{display:none}}
+.rbox bdi{white-space:nowrap;unicode-bidi:isolate}
 </style>
 </head>
 <body>
@@ -606,6 +607,13 @@ const RP={
    l.pc=[];const re=/(\d{1,3}(?:\s*\.\s*\d{1,2})?)\s*%|%\s*(\d{1,3}(?:\.\d{1,2})?)(?![\d.])/g;let m;while((m=re.exec(s))){const v=parseFloat((m[1]||m[2]).replace(/\s/g,''));if(v<=100)l.pc.push({v,x:xs[m.index]})}});
   return L},
  kw14(lz){if(/رخص/.test(lz))return'1-4-1-4';if(/تطويرمه/.test(lz))return'1-4-1-5';if(/خطهتحس/.test(lz))return'1-4-1-7';if(/هيئه|معيير|معييري|تقويمذت|تقويمذيت/.test(lz))return'1-4-1-6';if(/كدر/.test(lz)&&/تعيمي/.test(lz))return'1-4-1-1';if(/كدر/.test(lz)&&/دري/.test(lz))return'1-4-1-2';if(/ستدمه|مءه|مءمه/.test(lz))return'1-4-1-3';return null},
+ pickV(a,b,lv){const okv=v=>v!=null&&v>=0&&v<=100&&(lv==null||lvOf(v)===lv);if(okv(a))return a;if(okv(b))return b;
+  for(const v of [a,b]){if(v==null)continue;const t=String(v);const R={3:'9',2:'8',1:'6',0:'4'};if(lv!=null&&lv>0){const f=+(R[lv]+t.slice(1));if(t.length>1&&okv(f))return f;const f2=+(R[lv]+t);if(okv(f2))return f2}}
+  return a!=null?a:b},
+ mapCode(code,txt,o){txt=txt||'';o=o||{};
+  if(/^1-4-1-/.test(code)){const k=RP.kw14(txt);if(k)return[k];if(!o.n14&&/^1-4-1-[1-4]$/.test(code)&&o.ocr!==false&&o.n14===0)return['1-4-1-'+(+code.slice(-1)+3)];return[code]}
+  if(/^3-1-1-[12]$/.test(code)){if(/تحصي/.test(txt))return['S1','S2'];if(/قدرت|قدره/.test(txt)&&!/ريضي|قرءه/.test(txt))return['S3','S4']}
+  return[code]},
  parse(pages){const R={school:{},dom:[],ind:{},kind:''};const P=pages.map(RP.lines);const all=P.flat();
   R.kind=all.some(l=>/وحهنتئج|وحهتحقق/.test(l.lz))?'لوحة التحقق':all.some(l=>/خرجي/.test(l.lz)&&/تقرير/.test(l.lz)&&l.y>700)?'تقرير التقويم الخارجي':all.some(l=>/ذيت|ذتي/.test(l.lz)&&l.y>700)?'تقرير التقويم الذاتي':'تقرير';
   const p1=P[0]||[];
@@ -629,36 +637,118 @@ const RP={
   P.forEach((L,pi)=>{const items=pages[pi];
    const pcl=L.filter(l=>l.pc.length);
    const near=(y,x)=>{let b=null,bd=99;pcl.forEach(l=>{const d=Math.abs(l.y-y);if(d<=16&&d<bd){bd=d;b=l}});return b?b.pc.slice().sort((a,c)=>Math.abs(a.x-x)-Math.abs(c.x-x))[0].v:null};
-   const add=(code,y,x,txt)=>{let c=code;if(/^1-4-1-/.test(c)){const k=RP.kw14(txt);if(k)c=k}
-    if(!IDX[c]||R.ind[c]!=null)return;const v=near(y,x);if(v!=null)R.ind[c]=v};
+   const add=(code,y,x,txt)=>{const v=near(y,x);if(v==null)return;RP.mapCode(code,txt).forEach(c=>{if(IDX[c]&&R.ind[c]==null)R.ind[c]=v})};
    L.forEach((l,li)=>{const re=/(\d)\s*-\s*(\d)\s*-\s*(\d)\s*-\s*(\d)/g;let m;while((m=re.exec(l.ltr))){const code=[m[1],m[2],m[3],m[4]].join('-');const nx=L.filter(o=>o.y<l.y&&o.y>=l.y-20).map(o=>o.lz).join('');add(code,l.y,l.xs[m.index],l.lz+nx)}});
    const A=items.map(t=>[RP.nd(t[0]).trim(),t[1],t[2]]);
    A.filter(t=>/^\d-\d-$/.test(t[0])).forEach(h=>{const t2=A.filter(t=>/^\d-\d$/.test(t[0])&&t[2]<h[2]&&t[2]>=h[2]-30&&Math.abs(t[1]-h[1])<60).sort((a,b)=>b[2]-a[2])[0];if(!t2)return;
     const code=h[0]+t2[0];const txt=L.filter(o=>o.y<=h[2]+3&&o.y>=t2[2]-12).map(o=>o.lz).join('');
     const pt=A.filter(t=>/^\d{1,3}(\.\d+)?%$/.test(t[0])&&t[2]<=h[2]+4&&t[2]>=t2[2]-4).sort((a,b)=>Math.abs(a[2]-(h[2]+t2[2])/2)-Math.abs(b[2]-(h[2]+t2[2])/2))[0];
-    let c=code;if(/^1-4-1-/.test(c)){const k=RP.kw14(txt);if(k)c=k}
-    if(IDX[c]&&R.ind[c]==null&&pt)R.ind[c]=parseFloat(pt[0])})});
+    if(pt)RP.mapCode(code,txt).forEach(c=>{if(IDX[c]&&R.ind[c]==null)R.ind[c]=parseFloat(pt[0])})})});
   return R}
 };
 let PDFJS=null;
 function loadPdfJs(){if(PDFJS)return PDFJS;PDFJS=new Promise((ok,no)=>{if(window.pdfjsLib)return ok(window.pdfjsLib);const s=document.createElement('script');s.src='pdfjs/pdf.min.js';s.onload=()=>{try{pdfjsLib.GlobalWorkerOptions.workerSrc='pdfjs/pdf.worker.min.js';ok(pdfjsLib)}catch(e){no(e)}};s.onerror=()=>{PDFJS=null;no(new Error('load'))};document.head.appendChild(s)});return PDFJS}
 function busy(on,msg){let b=$('#busyBox');if(!b){b=document.createElement('div');b.id='busyBox';b.className='rmod';document.body.appendChild(b)}b.innerHTML=on?'<div class="rbox" style="text-align:center"><div style="font-size:34px">📖</div><h3>'+esc(msg||'جارٍ قراءة التقرير…')+'</h3><p class="muted">القراءة تتم داخل جهازك فقط، ولا يُرفع الملف إلى أي خادم.</p></div>':'';b.classList.toggle('on',!!on)}
 async function importReport(f){busy(true,'جارٍ قراءة التقرير «'+f.name+'»…');let lib;
+ const upd=t=>{const h=$('#busyBox h3');if(h)h.textContent=t};
+ const manual='<div class="row"><button class="btn teal" data-act="rGo" data-t="build">✍️ الإدخال اليدوي</button></div>';
  try{lib=await loadPdfJs()}catch(e){busy(false);rModal('<h3>⚠️ تعذّر تحميل قارئ PDF</h3><p>قراءة التقارير تحتاج فتح المنصة من رابطها المنشور (وليس من ملف محفوظ)، مع اتصال بالإنترنت أول مرة فقط، وبعدها تعمل دون اتصال.</p><p class="muted">https://alotibi21-spec.github.io/school-plan-app/</p>');return}
- try{const buf=await f.arrayBuffer();const doc=await lib.getDocument({data:new Uint8Array(buf),isEvalSupported:false}).promise;const pages=[];let chars=0;
-  for(let i=1;i<=doc.numPages;i++){const p=await doc.getPage(i);const t=await p.getTextContent();pages.push(t.items.map(x=>[x.str,Math.round(x.transform[4]),Math.round(x.transform[5])]));chars+=t.items.reduce((a,x)=>a+x.str.trim().length,0)}
-  busy(false);
-  if(chars<doc.numPages*20){rModal('<h3>🖼️ التقرير ممسوح ضوئيًا (صورة)</h3><p>الملف «'+esc(f.name)+'» ('+doc.numPages+' صفحة) لا يحتوي نصًا قابلًا للقراءة؛ لأنه صورة ممسوحة أو ملتقطة بالكاميرا، فلا يمكن استخراج النسب منه آليًا.</p><p><b>الحلول:</b> نزّل التقرير الأصلي (PDF) من منصة التقويم المدرسي أو لوحة التحقق ثم استورده، أو أدخل نسب المؤشرات يدويًا من تبويب «بناء الخطة».</p><div class="row"><button class="btn teal" data-act="rGo" data-t="build">✍️ الإدخال اليدوي</button></div>');return}
-  const R=RP.parse(pages);showReport(R,f.name)}
- catch(e){busy(false);rModal('<h3>⚠️ تعذّرت قراءة الملف</h3><p>'+(/password/i.test(e&&e.name||'')?'الملف محمي بكلمة مرور.':'الملف ليس PDF صالحًا أو تالف.')+'</p>')}}
+ let doc=null,why='';
+ try{const buf=new Uint8Array(await f.arrayBuffer());
+  if(!/%PDF-/.test(String.fromCharCode.apply(null,buf.subarray(0,1024))))why='notpdf';
+  const task=lib.getDocument({data:buf,isEvalSupported:false,stopAtErrors:false,useSystemFonts:true});
+  task.onPassword=(cb,reason)=>{busy(false);const pw=prompt(reason===2?'كلمة المرور غير صحيحة، أعد إدخالها:':'الملف محمي بكلمة مرور. أدخل كلمة المرور لفتحه:');if(pw==null){why='pw';task.destroy()}else{busy(true,'جارٍ فتح الملف…');cb(pw)}};
+  doc=await task.promise}
+ catch(e){doc=null;if(!why)why=/password/i.test(e&&e.name||'')?'pw':'bad'}
+ if(!doc&&why==='bad'){try{upd('الملف تالف: جارٍ محاولة إصلاحه واستخراج صفحاته…');const jd=await jpegDoc(new Uint8Array(await f.arrayBuffer()));
+   if(jd){const t0=Date.now();const pg=await ocrDoc(jd,(i,m)=>upd('ملف تالف (استُخرجت '+m+' صفحة): التعرف الضوئي على الصفحة '+i+' من '+m+'… ('+Math.round((Date.now()-t0)/1000)+' ث)'));const O=parseOCR(pg,f.name);O.secs=Math.round((Date.now()-t0)/1000);O.repaired=jd.numPages;
+    if(Object.keys(O.ind).length){busy(false);showReport(O,f.name);return}}}catch(e){}}
+ if(!doc){busy(false);rModal('<h3>⚠️ تعذّر فتح الملف</h3><p>'+(why==='pw'?'الملف «'+esc(f.name)+'» محمي بكلمة مرور ولم تُدخل كلمة المرور الصحيحة.':why==='notpdf'?'الملف «'+esc(f.name)+'» ليس بصيغة PDF.':'الملف «'+esc(f.name)+'» تالف أو بنيته غير مكتملة (قد يكون تنزيله لم يكتمل).')+'</p><p><b>الحلول:</b> أعد تنزيل التقرير من مصدره، أو افتحه في أي قارئ واختر «طباعة ← حفظ بصيغة PDF» ثم استورد النسخة الجديدة، أو أدخل نسب المؤشرات يدويًا.</p>'+manual);return}
+ const n=doc.numPages,pages=[];let chars=0,bad=0;
+ for(let i=1;i<=n;i++){upd('جارٍ قراءة الصفحة '+i+' من '+n+'…');try{const p=await doc.getPage(i);const t=await p.getTextContent();pages.push(t.items.filter(x=>x&&x.transform).map(x=>[x.str,Math.round(x.transform[4]),Math.round(x.transform[5])]));chars+=t.items.reduce((a,x)=>a+String(x.str||'').trim().length,0)}catch(e){pages.push([]);bad++}}
+ let R=null;if(chars>=n*20){try{R=RP.parse(pages)}catch(e){R=null}}
+ const cnt=r=>r?Object.keys(r.ind||{}).length:0;
+ if(cnt(R)<10){ // لا نص، أو نص غير قابل للقراءة (خطوط عربية بلا جدول ToUnicode): التعرف الضوئي
+  let O=null;const t0=Date.now();
+  try{const ttl=((await doc.getMetadata().catch(()=>null))||{}).info||{};upd('جارٍ تجهيز التعرف الضوئي (أول مرة فقط يحتاج اتصالًا بالإنترنت)…');
+   const pg=await ocrDoc(doc,(i,m)=>upd('التقرير مصوّر: التعرف الضوئي على الصفحة '+i+' من '+m+'… ('+Math.round((Date.now()-t0)/1000)+' ث)'));O=parseOCR(pg,ttl.Title||f.name);O.secs=Math.round((Date.now()-t0)/1000)}catch(e){O=null}
+  if(cnt(O)>cnt(R)){if(R)for(const k in R.school)if(R.school[k]&&!O.school[k])O.school[k]=R.school[k];R=O}}
+ busy(false);
+ if(R&&(cnt(R)||R.school.num||R.school.name)){if(bad)R.bad=bad;showReport(R,f.name);return}
+ rModal('<h3>🖼️ لم أستطع استخراج النسب من الملف</h3><p>الملف «'+esc(f.name)+'» ('+n+' صفحة) '+(chars<n*20?'لا يحتوي نصًا قابلًا للقراءة، ولم ينجح التعرف الضوئي في قراءته (قد تكون الصورة غير واضحة أو التعرف الضوئي لم يُحمَّل لعدم الاتصال).':'لا يحتوي بيانات تقرير التقويم المدرسي المعروفة.')+'</p><p><b>الحلول:</b> نزّل التقرير الأصلي (PDF) من منصة التقويم المدرسي أو لوحة التحقق ثم استورده، أو أدخل نسب المؤشرات يدويًا من تبويب «بناء الخطة».</p>'+manual)}
+let TESS=null;
+function loadTess(){if(TESS)return TESS;TESS=new Promise((ok,no)=>{if(window.Tesseract)return ok(window.Tesseract);const s=document.createElement('script');s.src='ocr/tesseract.min.js';s.onload=()=>ok(window.Tesseract);s.onerror=()=>{TESS=null;no(new Error('load'))};document.head.appendChild(s)});return TESS}
+function ocrCrop(c,x,y,w,h,k){x=Math.max(0,Math.round(x));y=Math.max(0,Math.round(y));w=Math.round(Math.min(w,c.width-x));h=Math.round(Math.min(h,c.height-y));k=k||3;
+ const sg=c.getContext('2d').getImageData(x,y,w,h).data;const sat=i=>Math.max(sg[i],sg[i+1],sg[i+2])-Math.min(sg[i],sg[i+1],sg[i+2])>50;
+ let x0=w,x1=-1,y0=h,y1=-1,n=0;for(let yy=0;yy<h;yy++)for(let xx=0;xx<w;xx++){if(sat((yy*w+xx)*4)){n++;if(xx<x0)x0=xx;if(xx>x1)x1=xx;if(yy<y0)y0=yy;if(yy>y1)y1=yy}}
+ let cr=0,cg=0,cb=0;for(let i=0;i<sg.length;i+=4)if(sat(i)){cr+=sg[i];cg+=sg[i+1];cb+=sg[i+2]}
+ const cell=n>w*h*0.25&&x1-x0>12&&y1-y0>8;const lv=!cell?null:(cg>cr&&cg>cb)?3:(cb>cr&&cb>cg)?2:(cr>cg*1.7)?0:1;if(cell){x+=x0+4;w=x1-x0-7;y+=y0+3;h=y1-y0-5}
+ const P=12,o=document.createElement('canvas');o.width=w*k+2*P;o.height=h*k+2*P;const g=o.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,o.width,o.height);g.imageSmoothingQuality='high';g.drawImage(c,x,y,w,h,P,P,w*k,h*k);
+ const im=g.getImageData(0,0,o.width,o.height),d=im.data;
+ for(let i=0;i<d.length;i+=4){const L=0.299*d[i]+0.587*d[i+1]+0.114*d[i+2],S=Math.max(d[i],d[i+1],d[i+2])-Math.min(d[i],d[i+1],d[i+2]);const ink=cell?(L>170&&S<60):L<150;const v=ink?0:255;d[i]=d[i+1]=d[i+2]=v}
+ g.putImageData(im,0,0);g.fillStyle='#fff';g.fillRect(0,0,o.width,P);g.fillRect(0,o.height-P,o.width,P);g.fillRect(0,0,P,o.height);g.fillRect(o.width-P,0,P,o.height);o.lv=lv;return o}
+/* إصلاح: استخراج صور JPEG المضمّنة من ملف PDF تالف لقراءتها ضوئيًا */
+async function jpegDoc(buf){const imgs=[];let i=0;const L=buf.length;
+ while(i<L-3){if(buf[i]===0xFF&&buf[i+1]===0xD8&&buf[i+2]===0xFF){let j=i+3,end=-1;while(j<L-1){if(buf[j]===0xFF&&buf[j+1]===0xD9){end=j+2;const nx=buf.indexOf(0xFF,end);if(end-i>40000&&(j+2>=L||String.fromCharCode(buf[end],buf[end+1]||0,buf[end+2]||0).match(/^\s*(e|$)/)))break}j++}
+   if(end<0)break;if(end-i>40000)imgs.push(buf.subarray(i,end));i=end}else i++}
+ const bm=[];for(const d of imgs){try{bm.push(await createImageBitmap(new Blob([d],{type:'image/jpeg'})))}catch(e){}}
+ const big=bm.filter(b=>b.width>600&&b.height>b.width*1.2);if(!big.length)return null;
+ return{numPages:big.length,getMetadata:async()=>({info:{}}),getPage:async k=>{const im=big[k-1];return{getViewport:({scale})=>{const w=595.28*scale;return{width:w,height:w*im.height/im.width}},render:({canvasContext:g,viewport:v})=>{g.drawImage(im,0,0,v.width,v.height);return{promise:Promise.resolve()}}}}}}
+async function ocrDoc(doc,onp){const T=await loadTess();const base=new URL('ocr/',location.href).href;const opt={workerPath:base+'worker.min.js',corePath:base,langPath:base.replace(/\/$/,''),gzip:true,workerBlobURL:false};
+ const we=await T.createWorker('eng',1,opt);let wa=null,wd=null;const WD=async()=>{if(!wd){wd=await T.createWorker('eng',1,opt);await wd.setParameters({tessedit_pageseg_mode:'7',tessedit_char_whitelist:'0123456789.%'})}return wd};const out=[];
+ try{await we.setParameters({tessedit_pageseg_mode:'11'});
+  for(let i=1;i<=doc.numPages;i++){onp&&onp(i,doc.numPages);const p=await doc.getPage(i);const vp=p.getViewport({scale:2.8});const c=document.createElement('canvas');c.width=Math.round(vp.width);c.height=Math.round(vp.height);
+   const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await p.render({canvasContext:g,viewport:vp}).promise;
+   const {data}=await we.recognize(c);const words=(data.words||[]).map(x=>({t:x.text,b:x.bbox}));const pg={W:c.width,H:c.height,words,rt:{},cell:{}};
+   // قراءة خلية النسبة لكل مؤشر بدقة أعلى (أرقام فقط)
+   for(const x of words){const t=RP.nd(x.t).replace(/[–—−]/g,'-');if(!/^\d-\d-\d-\d$/.test(t)||x.b.x0<c.width*0.6)continue;await WD();
+    const h=x.b.y1-x.b.y0,cy=(x.b.y0+x.b.y1)/2;const cc=ocrCrop(c,c.width*0.03,cy-h*2.1,c.width*0.18,h*2.2,3);const r=await wd.recognize(cc);(pg.clv=pg.clv||{})[t]=cc.lv;const m=/(\d{1,3}(?:\.\d{1,4})?)\s*%/.exec(r.data.text||'');if(m&&+m[1]<=100)pg.cell[t]=+m[1]}
+   // نص المؤشرات التي يعتمد ربطها على صياغتها (1-4-1-x و 3-1-1-x) بالتعرف العربي على سطرها فقط
+   for(const x of words){const t=RP.nd(x.t).replace(/[–—−]/g,'-');if(/^(1-4-1|3-1-1)-\d$/.test(t)||(i===1&&false)){if(!wa){wa=await T.createWorker('ara',1,opt);await wa.setParameters({tessedit_pageseg_mode:'6'})}
+     const h=x.b.y1-x.b.y0,top=Math.max(0,x.b.y0-h*1.2);const r=await wa.recognize(c,{rectangle:{left:Math.round(c.width*0.15),top:Math.round(top),width:Math.round(Math.max(10,x.b.x0-c.width*0.15)),height:Math.round(h*3.4)}});pg.rt[t]=(pg.rt[t]||'')+' '+r.data.text}}
+   if(i===1){if(!wa){wa=await T.createWorker('ara',1,opt);await wa.setParameters({tessedit_pageseg_mode:'6'})}const r=await wa.recognize(ocrCrop(c,0,c.height*0.13,c.width,c.height*0.15,1.5));pg.head=r.data.text;const r2=await (await WD()).recognize(ocrCrop(c,c.width*0.05,c.height*0.39,c.width*0.12,c.height*0.03,3));pg.head+='\n'+r2.data.text}
+   out.push(pg);c.width=c.height=0}}
+ finally{try{await we.terminate()}catch(e){}if(wa)try{await wa.terminate()}catch(e){}if(wd)try{await wd.terminate()}catch(e){}}return out}
+/* تحليل تقرير مصوّر (بعد التعرف الضوئي) */
+function parseOCR(pages,title){const R={school:{},dom:[],ind:{},kind:'',ocr:true};const nd=s=>RP.nd(String(s)).replace(/[٫,]/g,'.').replace(/[–—−]/g,'-').trim();
+ title=String(title||'');const tz=RP.loose(title);
+ R.kind=/ذيت|ذتي/.test(tz)?'تقرير التقويم الذاتي (مصوّر)':/خرجي/.test(tz)?'تقرير التقويم الخارجي (مصوّر)':'تقرير مصوّر';
+ const p1=pages[0]||{words:[],W:1,H:1};const head=String(p1.head||'');
+ const nm=/(?:^|\s)[S$5§]-?([A-Z])(\d{5,})(?!\d)/.exec(' '+p1.words.map(w=>nd(w.t)).join(' '));if(nm)R.school.num='S-'+nm[1]+nm[2];
+ const tn=title.split(/\s+-\s+تقرير/)[0].trim();if(tn&&tn!==title&&!/\.pdf$/i.test(tn))R.school.name=tn;
+ const n2=RP.loose(R.school.name||'');R.school.stage=/ثنوي/.test(n2)?(/مسر/.test(n2)?'ثانوية (مسارات)':'ثانوية'):/متوسط/.test(n2)?'متوسطة':/بتد/.test(n2)?'ابتدائية':/روضه|ريض/.test(n2)?'رياض الأطفال':/مجمع/.test(n2)?'مجمع تعليمي':'';
+ R.school.gender=/بنات/.test(head)?'بنات':/بنين/.test(head)?'بنين':'';
+ {const m=/(\d{1,3}(?:\.\d+)?)\s*%/.exec(RP.nd(head.split('\n').slice(-3).join(' ')));if(m&&+m[1]<=100)R.overall=+m[1]}
+ const pc=(pg,f)=>pg.words.map(x=>{const m=/^(\d{1,3}(?:\.\d{1,4})?)%$/.exec(nd(x.t));return m&&+m[1]<=100?{v:+m[1],x:(x.b.x0+x.b.x1)/2,y:(x.b.y0+x.b.y1)/2,b:x.b}:null}).filter(Boolean).filter(f||(()=>1));
+ // الصفحة الأولى: النسبة العامة (شريط المستوى) ونسب المجالات (أعمدة الرسم)
+ const p1p=pc(p1);const bars=p1p.filter(p=>p.y>p1.H*0.45&&p.y<p1.H*0.72);if(bars.length>=4)bars.sort((a,b)=>b.x-a.x).slice(0,4).forEach((p,k)=>R.dom[k]=p.v);
+ const ov=p1p.filter(p=>p.y>p1.H*0.3&&p.y<p1.H*0.45);if(ov.length)R.overall=ov[0].v;
+ // المؤشرات
+ const rows=[];
+ pages.forEach((pg,pi)=>{if(pi===0)return;const codes=[];
+  pg.words.forEach(x=>{const t=nd(x.t);const m=/^(\d)-(\d)-(\d)-(\d)$/.exec(t);if(m&&x.b.x0>pg.W*0.6)codes.push({c:t,y:(x.b.y0+x.b.y1)/2,txt:RP.loose(pg.rt[t]||''),cv:pg.cell[t],lv:(pg.clv||{})[t]})});
+  const pcts=pc(pg,p=>p.x<pg.W*0.3&&p.y>pg.H*0.1);const used=new Set();
+  pcts.forEach(p=>{let b=null,bd=1e9;codes.forEach((c,ci)=>{const d=Math.abs(c.y-p.y);if(d<bd&&!used.has(ci)){bd=d;b=ci}});
+   if(b!=null&&bd<=pg.H*0.025){used.add(b);const cd=codes[b];rows.push({pi,y:p.y,c:cd.c,txt:cd.txt,v:RP.pickV(cd.cv,p.v,cd.lv),lv:cd.lv})}else if(codes.length)rows.push({pi,y:p.y,c:null,txt:'',v:p.v})});
+  codes.forEach((c,ci)=>{if(!used.has(ci))rows.push({pi,y:c.y,c:c.c,txt:c.txt,v:RP.pickV(c.cv,null,c.lv),lv:c.lv})})});
+ rows.sort((a,b)=>a.pi-b.pi||a.y-b.y);
+ const key=c=>c.split('-').map(Number);const lt=(a,b)=>{const x=key(a),y=key(b);return x[0]<y[0]||(x[0]===y[0]&&(x[1]<y[1]||(x[1]===y[1]&&x[3]<y[3])))};
+ for(let i=0;i<rows.length;i++){const r=rows[i];const pv=rows.slice(0,i).reverse().find(x=>x.c),nx=rows.slice(i+1).find(x=>x.c);
+  if(r.c&&pv&&nx&&!(lt(pv.c,r.c)&&lt(r.c,nx.c))){const a=key(pv.c),b=key(nx.c),k=key(r.c);const c1=[a[0],a[1],1,a[3]+1].join('-'),c2=[b[0],b[1],1,b[3]-1].join('-');
+   r.c=(lt(pv.c,c2)&&b[3]>1&&(k[3]===b[3]-1||!lt(c1,nx.c)))?c2:c1;r.fix=1}
+  if(!r.c&&r.v!=null){if(nx){const b=key(nx.c);const c2=[b[0],b[1],1,b[3]-1].join('-');if(b[3]>1&&(!pv||lt(pv.c,c2)))r.c=c2}
+   if(!r.c&&pv){const a=key(pv.c);r.c=[a[0],a[1],1,a[3]+1].join('-')}r.fix=1}}
+ const n14=rows.filter(r=>r.c&&/^1-4-1-[5-9]$/.test(r.c)).length;
+ rows.forEach(r=>{if(!r.c||r.v==null)return;RP.mapCode(r.c,r.txt,{n14}).forEach(c=>{if(IDX[c]&&R.ind[c]==null)R.ind[c]=r.v})});
+ R.rows=rows;R.src=rows.filter(r=>r.c).length;return R}
 let LASTREP=null;const NW=n=>n+' '+(n>=3&&n<=10?'مؤشرات':'مؤشرًا');
 function lvOf(p){return p<50?0:p<75?1:p<90?2:3}
 function showReport(R,name){LASTREP=R;const codes=ORDER.slice();const got=codes.filter(c=>R.ind[c]!=null),miss=codes.filter(c=>R.ind[c]==null);const sc=R.school,DN=FW.map(d=>d.t);
  if(!got.length&&!sc.num){rModal('<h3>⚠️ لم يُتعرف على التقرير</h3><p>لم أجد في «'+esc(name)+'» بيانات تقرير التقويم المدرسي (الرقم الوزاري أو رموز المؤشرات مثل 1-1-1-1). تأكد أنه تقرير التقويم الذاتي/الخارجي أو لوحة التحقق بصيغة PDF الأصلية.</p>');return}
  rModal('<h3>📄 نتيجة قراءة التقرير</h3><p class="muted" style="margin-top:0">'+esc(R.kind)+' · '+esc(name)+'</p>'+
  '<table class="rtab"><tr><td>المدرسة</td><td>'+esc(sc.name||'—')+'</td></tr><tr><td>الرقم الوزاري</td><td>'+esc(sc.num||'—')+'</td></tr><tr><td>المرحلة / الجنس</td><td>'+esc((sc.stage||'—')+' / '+(sc.gender||'—'))+'</td></tr><tr><td>النسبة العامة</td><td>'+(R.overall!=null?R.overall+'%':'—')+'</td></tr>'+DN.map((d,k)=>'<tr><td>'+d+'</td><td>'+(R.dom[k]!=null?R.dom[k]+'%':'—')+'</td></tr>').join('')+'</table>'+
- '<p><b>✓ قُرئت نسب '+NW(got.length)+' من '+codes.length+'</b>'+(got.filter(c=>R.ind[c]>=100).length?' (منها '+got.filter(c=>R.ind[c]>=100).length+' بنسبة 100%)':'')+'.</p>'+
- (miss.length?'<p>⚠️ لم تُقرأ نسب '+NW(miss.length)+': '+miss.map(c=>'<bdi dir="ltr">'+c+'</bdi>').join('، ')+'. '+(miss.some(c=>/^1-4-1-[123]$/.test(c))?'(المؤشرات 1-4-1-1 إلى 1-4-1-3 جديدة وقد لا تظهر في التقارير السابقة) ':'')+'سيُولَّد لها خطة بالمستوى الذي تختاره، ويمكنك تعديل نسبها يدويًا من «بناء الخطة».</p>':'')+
+ (R.ocr?'<p class="repwarn" style="margin:6px 0">🔎 التقرير مصوّر وقُرئ بالتعرف الضوئي'+(R.secs?' خلال '+R.secs+' ثانية':'')+'؛ راجع النسب قبل الاعتماد.'+((R.rows||[]).some(r=>r.fix&&r.c)?' (استُنتج رمز: '+R.rows.filter(r=>r.fix&&r.c).map(r=>'<bdi dir="ltr">'+r.c+'</bdi>').join('، ')+')':'')+'</p>':'')+(R.repaired?'<p class="muted">🛠️ الملف كان تالفًا؛ استُخرجت '+R.repaired+' صفحة منه وقُرئت.</p>':'')+(R.bad?'<p class="muted">تعذّرت قراءة '+R.bad+' صفحة تالفة وتم تجاوزها.</p>':'')+'<p><b>✓ قُرئت نسب '+NW(got.length)+' من '+codes.length+'</b>'+(got.filter(c=>R.ind[c]>=100).length?' (منها '+got.filter(c=>R.ind[c]>=100).length+' بنسبة 100%)':'')+'.</p>'+
+ (miss.length?'<p>⚠️ لم تُقرأ نسب '+NW(miss.length)+': '+miss.map(c=>'<bdi dir="ltr">'+c+'</bdi>').join('، ')+'. '+(miss.some(c=>/^1-4-1-[123]$/.test(c))?'(المؤشرات <bdi dir="ltr">1-4-1-1</bdi> إلى <bdi dir="ltr">1-4-1-3</bdi> جديدة وقد لا تظهر في التقارير السابقة) '+(got.some(c=>/^S/.test(c))&&miss.some(c=>/^3-1-1-/.test(c))?'(مؤشرات الاختبارات الوطنية <bdi dir="ltr">3-1-1-x</bdi> لا ترد في تقارير المرحلة الثانوية، ونتائج التحصيلي والقدرات قُرئت في S1–S4) ':'')+'':'')+'سيُولَّد لها خطة بالمستوى الذي تختاره، ويمكنك تعديل نسبها يدويًا من «بناء الخطة».</p>':'')+
  '<label style="display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" id="rMiss" checked> توليد خطط للمؤشرات غير المقروءة أيضًا (بمستوى «انطلاق» تقديريًا)</label>'+
  '<div class="row"><button class="btn teal" data-act="rApply">⚡ تعبئة البيانات وتوليد الخطة</button><button class="btn" data-act="rSchoolOnly">🏫 تعبئة بيانات المدرسة فقط</button><button class="btn" data-act="rClose">إلغاء</button></div>')}
 function applyReport(withPlans){const R=LASTREP;if(!R)return;const sc=R.school,s=S.school;
