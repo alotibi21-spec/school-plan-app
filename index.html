@@ -345,7 +345,7 @@ html body{background-color:#f3faf7;background-image:url("data:image/svg+xml,%3Cs
 <footer class="foot hidden" id="foot">
  <div class="ribbon"><span><b>عضو الفريق التنفيذي بقطاع السر عبدالله خالد العتيبي</b></span><span>العام الدراسي 1448هـ</span></div>
  <div class="team" aria-label="أعضاء فريق العمل"><h3>👥 أعضاء فريق العمل</h3><ul><li>عبدالله الحافي</li><li>ضيف الله الكرشمي</li><li>بندر الروقي</li><li>شيخه عيد العصيمي</li></ul></div>
- <div>يعمل دون إنترنت · البيانات محفوظة على جهازك فقط · وفق مجالات ومعايير ومؤشرات التقويم المدرسي (56 مؤشرًا منها 4 للمرحلة الثانوية)</div>
+ <div>يعمل دون إنترنت · البيانات محفوظة على جهازك فقط · وفق مجالات ومعايير ومؤشرات التقويم المدرسي (56 مؤشرًا منها 4 مؤشرات لاختباري التحصيلي والقدرات تنطبق على جميع المراحل)</div>
 </footer>
 <nav class="bbar" id="bbar" aria-label="التنقل">
  <button data-tab="dash" class="on"><i>🏠</i>الرئيسية</button>
@@ -403,7 +403,7 @@ function gen(code,lv,pct){const X=IDX[code],i=X.i,y=S.school.year||'',sec=S.scho
   kpi='رفع المؤشر'+(has?' من '+ps:'')+' إلى 100% والمحافظة على مستوى «تميز».';
   period='الفصل الدراسي الأول '+y+' ثم متابعة شهرية';
  }else{
-  need='تحقق المؤشر بدرجة متميزة'+(has?' ('+ps+')':'')+'؛ ولاستدامة التميز: الاستمرار في '+goal+' بأساليب متنوعة ومبتكرة، وتوثيق الممارسة المتميزة ونشرها على مدارس '+(sec==='السر'?'دارس المحافظة':'قطاع '+sec)+'.';
+  need='تحقق المؤشر بدرجة متميزة'+(has?' ('+ps+')':'')+'؛ ولاستدامة التميز: الاستمرار في '+goal+' بأساليب متنوعة ومبتكرة، وتوثيق الممارسة المتميزة ونشرها على مدارس '+(sec==='السر'?'المحافظة':'قطاع '+sec)+'.';
   acts=i.s.concat(['توثيق الممارسة في ملف «ممارسة متميزة» مكتمل الشواهد والنتائج']);
   mech=['مراجعة سنوية للممارسة','عرض التجربة في لقاءات مدارس القطاع','تبادل الزيارات','توثيق الشواهد'].join('، ')+'.';
   kpi='المحافظة على المؤشر بنسبة 100% ونشر ممارسة متميزة موثقة واحدة على الأقل.';
@@ -493,7 +493,7 @@ function lib(){try{return JSON.parse(store.get(LIB)||'[]')}catch(e){return[]}}
 function rFiles(){const L=lib();
  $('#s-files').innerHTML='<div class="card"><h2>📄 استيراد تقرير التقويم المدرسي</h2><p class="muted" style="margin-top:0">اختر تقرير التقويم الذاتي أو الخارجي أو لوحة التحقق (PDF) من ملفات جهازك أو تنزيلاتك أو مما حفظته من واتساب؛ تُقرأ بيانات المدرسة ونسب المؤشرات داخل جهازك دون رفع الملف لأي خادم، ثم تُولّد الخطة.</p><button class="btn teal" data-act="imp">📄 اختيار تقرير PDF من الجهاز</button></div><div class="card"><h2>💾 ملف المشروع (JSON)</h2><p class="muted" style="margin-top:0">صدّر خطة المدرسة ملفًا تحتفظ به أو ترسله، ثم استورده لاحقًا على أي جهاز.</p><div class="row"><button class="btn teal" data-act="exp">⬇️ تصدير المشروع</button><button class="btn" data-act="imp">⬆️ استيراد تقرير PDF أو مشروع</button><button class="btn" data-act="new">📄 مدرسة جديدة</button><button class="btn red" data-act="reset">♻️ إعادة ضبط</button></div></div>'+
  '<div class="card"><h2>🏫 مدارسي المحفوظة على هذا الجهاز</h2><div class="row" style="margin-bottom:10px"><button class="btn gold" data-act="libSave">＋ حفظ المدرسة الحالية في القائمة</button></div>'+(L.length?L.map((x,k)=>'<div class="lib"><div><b>'+esc(x.name||'بدون اسم')+'</b> <span class="muted">· '+x.n+' خطة · '+esc(x.date)+'</span></div><div class="row"><button class="btn sm teal" data-act="libLoad" data-k="'+k+'">فتح</button><button class="btn sm red" data-act="libDel" data-k="'+k+'">حذف</button></div></div>').join(''):'<p class="muted">لا توجد مدارس محفوظة بعد.</p>')+'</div>'+
- '<div class="card"><h2>ℹ️ عن المنصة</h2><p class="muted" style="margin:0">الإطار: 4 مجالات · 11 معيارًا · 56 مؤشرًا (منها 4 مؤشرات لاختباري التحصيلي والقدرات تُضاف للمرحلة الثانوية) وفق تقرير التقويم المدرسي (هيئة تقويم التعليم والتدريب). مستويات الأداء: تهيئة (أقل من 50%) · انطلاق (50 إلى أقل من 75%) · تقدم (75 إلى أقل من 90%) · تميز (90% فأكثر). جميع البيانات تبقى على جهازك.</p></div>'}
+ '<div class="card"><h2>ℹ️ عن المنصة</h2><p class="muted" style="margin:0">الإطار: 4 مجالات · 11 معيارًا · 56 مؤشرًا (منها 4 مؤشرات لاختباري التحصيلي والقدرات تنطبق على جميع المراحل) وفق تقرير التقويم المدرسي (هيئة تقويم التعليم والتدريب). مستويات الأداء: تهيئة (أقل من 50%) · انطلاق (50 إلى أقل من 75%) · تقدم (75 إلى أقل من 90%) · تميز (90% فأكثر). جميع البيانات تبقى على جهازك.</p></div>'}
 /* ---------- نسخ وتصدير ---------- */
 function planText(c){const p=S.plans[c],i=IDX[c].i;return 'رقم المؤشر: '+c+'\nالمؤشر: '+i.t+'\nالمستوى الحالي: '+LV[p.lv]+(p.pct!==''&&p.pct!=null?' ('+p.pct+'%)':'')+'\n\nوصف الاحتياج:\n'+p.need+'\n\nإجراءات التحسين:\n'+p.proc+'\n\nأساليب وطرق التحسين:\n'+p.mech+'\n\nالتنفيذ والمسؤولية: '+p.resp+'\nمدة الإنجاز: '+p.period+'\nمؤشر النجاح: '+p.kpi}
 function copy(t){const done=()=>toast('✓ تم النسخ');const fb=()=>{const ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;opacity:0';document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand('copy')}catch(e){}ta.remove();ok?done():toast('تعذر النسخ تلقائيًا؛ حدد النص وانسخه يدويًا')};
@@ -722,7 +722,7 @@ window.addEventListener('afterprint',()=>{if(TAB!=='print')$('#printArea').inner
 const EMB=$('.brand svg').outerHTML;
 function setTheme(m){document.documentElement.dataset.theme=m;$('#themeBtn').textContent=m==='dark'?'☀️':'🌙';store.set('sip_theme',m)}
 setTheme(store.get('sip_theme')||'light');
-if(/^https?:$/.test(location.protocol)){try{const l=document.createElement('link');l.rel='manifest';l.href='manifest.webmanifest';document.head.appendChild(l);if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
+if(/^https?:$/.test(location.protocol)){try{const l=document.createElement('link');l.rel='manifest';l.href='manifest.webmanifest';document.head.appendChild(l);if('serviceWorker' in navigator){const hadC=!!navigator.serviceWorker.controller;let rl=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadC||rl)return;rl=true;location.reload()});navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{r.update().catch(()=>{});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')r.update().catch(()=>{})})}).catch(()=>{})}}catch(e){}}
 $('#nojs').remove();$('#app').classList.remove('hidden');$('#foot').classList.remove('hidden');
 if(!store.ok)$('#storeWarn').classList.remove('hidden');
 updCount();show('dash');
