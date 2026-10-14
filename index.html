@@ -403,7 +403,7 @@ function gen(code,lv,pct){const X=IDX[code],i=X.i,y=S.school.year||'',sec=S.scho
   kpi='رفع المؤشر'+(has?' من '+ps:'')+' إلى 100% والمحافظة على مستوى «تميز».';
   period='الفصل الدراسي الأول '+y+' ثم متابعة شهرية';
  }else{
-  need='تحقق المؤشر بدرجة متميزة'+(has?' ('+ps+')':'')+'؛ ولاستدامة التميز: الاستمرار في '+goal+' بأساليب متنوعة ومبتكرة، وتوثيق الممارسة المتميزة ونشرها على مدارس قطاع '+sec+'.';
+  need='تحقق المؤشر بدرجة متميزة'+(has?' ('+ps+')':'')+'؛ ولاستدامة التميز: الاستمرار في '+goal+' بأساليب متنوعة ومبتكرة، وتوثيق الممارسة المتميزة ونشرها على مدارس '+(sec==='السر'?'دارس المحافظة':'قطاع '+sec)+'.';
   acts=i.s.concat(['توثيق الممارسة في ملف «ممارسة متميزة» مكتمل الشواهد والنتائج']);
   mech=['مراجعة سنوية للممارسة','عرض التجربة في لقاءات مدارس القطاع','تبادل الزيارات','توثيق الشواهد'].join('، ')+'.';
   kpi='المحافظة على المؤشر بنسبة 100% ونشر ممارسة متميزة موثقة واحدة على الأقل.';
@@ -653,7 +653,7 @@ async function importReport(f){busy(true,'جارٍ قراءة التقرير «'
  catch(e){busy(false);rModal('<h3>⚠️ تعذّرت قراءة الملف</h3><p>'+(/password/i.test(e&&e.name||'')?'الملف محمي بكلمة مرور.':'الملف ليس PDF صالحًا أو تالف.')+'</p>')}}
 let LASTREP=null;const NW=n=>n+' '+(n>=3&&n<=10?'مؤشرات':'مؤشرًا');
 function lvOf(p){return p<50?0:p<75?1:p<90?2:3}
-function showReport(R,name){LASTREP=R;const codes=ORDER.filter(c=>!IDX[c].i.hs||/ثنوي/.test(RP.loose(R.school.stage||S.school.stage||'')));const got=codes.filter(c=>R.ind[c]!=null),miss=codes.filter(c=>R.ind[c]==null);const sc=R.school,DN=FW.map(d=>d.t);
+function showReport(R,name){LASTREP=R;const codes=ORDER.slice();const got=codes.filter(c=>R.ind[c]!=null),miss=codes.filter(c=>R.ind[c]==null);const sc=R.school,DN=FW.map(d=>d.t);
  if(!got.length&&!sc.num){rModal('<h3>⚠️ لم يُتعرف على التقرير</h3><p>لم أجد في «'+esc(name)+'» بيانات تقرير التقويم المدرسي (الرقم الوزاري أو رموز المؤشرات مثل 1-1-1-1). تأكد أنه تقرير التقويم الذاتي/الخارجي أو لوحة التحقق بصيغة PDF الأصلية.</p>');return}
  rModal('<h3>📄 نتيجة قراءة التقرير</h3><p class="muted" style="margin-top:0">'+esc(R.kind)+' · '+esc(name)+'</p>'+
  '<table class="rtab"><tr><td>المدرسة</td><td>'+esc(sc.name||'—')+'</td></tr><tr><td>الرقم الوزاري</td><td>'+esc(sc.num||'—')+'</td></tr><tr><td>المرحلة / الجنس</td><td>'+esc((sc.stage||'—')+' / '+(sc.gender||'—'))+'</td></tr><tr><td>النسبة العامة</td><td>'+(R.overall!=null?R.overall+'%':'—')+'</td></tr>'+DN.map((d,k)=>'<tr><td>'+d+'</td><td>'+(R.dom[k]!=null?R.dom[k]+'%':'—')+'</td></tr>').join('')+'</table>'+
@@ -672,7 +672,7 @@ function pickFile(f){if(!f)return;f.slice(0,5).arrayBuffer().then(b=>{const h=St
 let TAB='dash';
 function show(t){TAB=t;$$('.nb,.bbar button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));$$('.sec').forEach(s=>s.classList.toggle('on',s.id==='s-'+t));const sd=$('.nb[data-tab=school]'),bd=$('.nb[data-tab=build]');sd.classList.toggle('done',!!S.school.name&&t!=='school');bd.classList.toggle('done',planCodes().length>0&&t!=='build');
  $('#printArea').classList.toggle('show',t==='print');({dash:rDash,build:rBuild,school:rSchool,print:rPrint,files:rFiles})[t]();window.scrollTo(0,0)}
-const APPL=()=>ORDER.filter(c=>!IDX[c].i.hs||HS());const HS=()=>/ثانوي|مجمع/.test(S.school.stage||'');
+const APPL=()=>ORDER.filter(c=>!IDX[c].i.hs||HS());const HS=()=>true;
 function quick(lv,dom){let n=0;ORDER.forEach(c=>{if(S.plans[c])return;if(IDX[c].i.hs&&!HS())return;if(dom!=null&&IDX[c].di!==dom)return;S.plans[c]=gen(c,lv,'');n++});updCount();save();toast(n?'✓ وُلّدت '+n+' خطة بمستوى «'+LV[lv]+'»':'كل المؤشرات مضافة مسبقًا');return n}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act],[data-tab]');if(!b)return;if(b.dataset.tab){show(b.dataset.tab);return}if(b.dataset.act==='delImg'){delete S.school[b.dataset.k];save();rSchool();return}if(b.dataset.act==='fillRecs'){S.school.recs=autoRecs();save();rSchool();return}
  const a=b.dataset.act,c=b.dataset.c;
